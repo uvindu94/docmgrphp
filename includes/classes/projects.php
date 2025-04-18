@@ -28,6 +28,40 @@ class projects {
         return $result;
     }
 
+
+    function upload_new_document($conn,$company,$docname,$docpath,$user,$doc_category)
+    {
+        $sql="INSERT INTO `documents` (`id`, `project_id`, `path`, `doc_name`, `user_id`, `category`, `created_at`, `updated_at`) VALUES (NULL, '$company', '$docpath', '$docname', '$user', '$doc_category', NULL, NULL);";
+        $result=mysqli_query($conn,$sql);
+
+        if($result)
+        {
+            return ['status'=>'200','message'=>'Document Created Successfully'];
+        }
+        else
+        {
+            return ['status'=>'403','message'=>'Failed to create Document'];
+        }
+
+    }
+
+
+    function get_all_categories($conn)
+    {
+        $sql="SELECT * FROM `document_categories`";
+        $result=mysqli_query($conn,$sql);
+
+        return $result;
+    }
+
+
+    function retreive_all_docs($conn)
+    {
+        $sql="SELECT p.name,doc.doc_name,cat.catname,doc.path,doc.created_at, so.name as so_name FROM `documents` doc,`projects` p, `document_categories` cat ,`sales_officers` so where doc.project_id=p.id AND doc.category=cat.id AND p.sales_officer=so.id;";
+        $result=mysqli_query($conn,$sql);
+        return $result;
+    }
+
 }
 
 

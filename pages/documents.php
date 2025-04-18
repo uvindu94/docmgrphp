@@ -13,11 +13,17 @@
                 <h4>Add New Document</h4>
                 <form action="" method="post" id="document_upload_form" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="company" class="form-label">Select Company</label>
+                        <label for="company" class="form-label">Select Project</label>
                         <select name="company" id="company" class="form-control" required>
                             <option value="">Select Company</option>
-                            <option value="1">ABC Pvt Ltd</option>
-                            <option value="2">XYZ Enterprises</option>
+                            <?php
+                            foreach ($projects as $project) {
+                                # code...
+                                echo '<option value="' . $project['id'] . '">Company : ' . $project['name'] . '   | Sales ofc:' . $project['sales_officer'] . ' </option>';
+                            }
+                            ?>
+
+
                             <!-- Add dynamic company list here -->
                         </select>
                     </div>
@@ -36,8 +42,14 @@
                         <label for="document_category" class="form-label">Document Category</label>
                         <select name="document_category" id="document_category" class="form-control" required>
                             <option value="">Select Category</option>
-                            <option value="proposal">Proposal</option>
-                            <option value="quotation">Quotation</option>
+
+                            <?php
+
+                            foreach ($doc_cats as $doc_cat) {
+                                # code...
+                                echo '<option value="' . $doc_cat['id'] . '">' . $doc_cat['catname'] . '</option>';
+                            }
+                            ?>
                         </select>
                     </div>
 
@@ -54,10 +66,10 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6 col-7">
-                                <h6>Projects</h6>
+                                <h6>Documents</h6>
                                 <p class="text-sm mb-0">
                                     <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                    <span class="font-weight-bold ms-1">30 done</span> this month
+                                    <!-- <span class="font-weight-bold ms-1">30 done</span> this month -->
                                 </p>
                             </div>
                             <div class="col-lg-6 col-5 my-auto text-end">
@@ -80,182 +92,56 @@
                             <table class="table align-items-center mb-0" id="companies">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Company & Doc</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Sales Officer</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created</th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+
+                                    <?php
+
+                                    foreach ($all_docs as $doc) {
+                                        # code...
+
+
+                                        echo '
+                                        <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="./assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="./assets/img/docicon.png" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">John Michael</h6>
-                                                    <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                                    <h6 class="mb-0 text-sm">'.$doc['doc_name'].'</h6>
+                                                    <p class="text-xs text-secondary mb-0">'.$doc['name'].'</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                            <p class="text-xs text-secondary mb-0">Organization</p>
+                                            <p class="text-xs font-weight-bold mb-0">'.$doc['so_name'].'</p>
+                                            <p class="text-xs text-secondary mb-0">Sales Officer</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Online</span>
+                                            <span class="badge badge-sm bg-gradient-warning">'.$doc['catname'].'</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                            <span class="text-secondary text-xs font-weight-bold">'.$doc['created_at'].'</span>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" contenteditable="false" style="cursor: pointer;">
-                                                Edit
+                                            <a href="'.$doc['path'].'" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" contenteditable="false" style="cursor: pointer;">
+                                                View
                                             </a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="./assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                                                    <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                            <p class="text-xs text-secondary mb-0">Developer</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" contenteditable="false" style="cursor: pointer;">
-                                                Edit
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="./assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user3">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                                                    <p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Executive</p>
-                                            <p class="text-xs text-secondary mb-0">Projects</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" contenteditable="false" style="cursor: pointer;">
-                                                Edit
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="./assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user4">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Michael Levi</h6>
-                                                    <p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                            <p class="text-xs text-secondary mb-0">Developer</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" contenteditable="false" style="cursor: pointer;">
-                                                Edit
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="./assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user5">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Richard Gran</h6>
-                                                    <p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                            <p class="text-xs text-secondary mb-0">Executive</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" contenteditable="false" style="cursor: pointer;">
-                                                Edit
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="./assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                                                    <p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Programtor</p>
-                                            <p class="text-xs text-secondary mb-0">Developer</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user" contenteditable="false" style="cursor: pointer;">
-                                                Edit
-                                            </a>
-                                        </td>
-                                    </tr>
+
+                                        ';
+                                    }
+
+                                    ?>
+                                    
                                 </tbody>
                             </table>
 
@@ -287,6 +173,7 @@
 </main>
 
 <script src="./assets/js/registercompany.js"></script>
+<script src="./assets/js/upload_document.js"></script>
 
 <script>
     $(document).ready(function() {

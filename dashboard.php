@@ -12,6 +12,9 @@ $sales_officer=$user->retreive_sales_officers($conn);
 $developers=$user->retreive_developers($conn);
 
 $projects=$project->retreive_projects($conn);
+$doc_cats=$project->get_all_categories($conn);
+
+$all_docs=$project->retreive_all_docs($conn);
 
 
 ?>
@@ -64,7 +67,7 @@ $projects=$project->retreive_projects($conn);
 <body class="g-sidenav-show  bg-gray-100">
   <!-- side navigation -->
   <?php
-  include('./includes/layouts/sidebar.php');
+  include('./includes/layouts/sidebar.php'); 
   ?>
 
   <!-- side navigation -->
