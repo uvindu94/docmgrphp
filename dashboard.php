@@ -1,20 +1,20 @@
 <?php session_start();
-require ('./includes/classes/projects.php');
-require ('./includes/classes/user.php');
-require ('./includes/connection/connection.php');   
+require('./includes/classes/projects.php');
+require('./includes/classes/user.php');
+require('./includes/connection/connection.php');
 
-$project=new projects();
-$user=new user();
+$project = new projects();
+$user = new user();
 
-$log_user=$_SESSION['email'];
+$log_user = $_SESSION['email'];
 
-$sales_officer=$user->retreive_sales_officers($conn);
-$developers=$user->retreive_developers($conn);
+$sales_officer = $user->retreive_sales_officers($conn);
+$developers = $user->retreive_developers($conn);
 
-$projects=$project->retreive_projects($conn);
-$doc_cats=$project->get_all_categories($conn);
+$projects = $project->retreive_projects($conn);
+$doc_cats = $project->get_all_categories($conn);
 
-$all_docs=$project->retreive_all_docs($conn);
+$all_docs = $project->retreive_all_docs($conn);
 
 
 ?>
@@ -55,19 +55,19 @@ $all_docs=$project->retreive_all_docs($conn);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <!-- DataTables CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <!-- DataTables JS -->
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
   <!-- side navigation -->
   <?php
-  include('./includes/layouts/sidebar.php'); 
+  include('./includes/layouts/sidebar.php');
   ?>
 
   <!-- side navigation -->
@@ -86,6 +86,8 @@ $all_docs=$project->retreive_all_docs($conn);
       include('./pages/users.php');
     } else if ($page == 'documents') {
       include('./pages/documents.php');
+    } else if ($page == 'so_dir') {
+      include('./pages/sales_dir.php');
     } else if ($page == 'budget_cal') {
       include('./pages/budget_cal.php');
     } else if ($page == 'logout') {
