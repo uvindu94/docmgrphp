@@ -26,4 +26,22 @@ class user {
     }
 
 
+    function retreive_sales_officers($con)
+    {
+        $sql="SELECT * FROM `sales_officers`";
+        $result=mysqli_query($con,$sql);
+
+        return $result;
+    }
+
+
+    function retreive_developers($con)
+    {
+        $sql="SELECT * FROM `developers`";
+        $result=mysqli_query($con,$sql);
+
+        return $result;
+    }
+
+
 }

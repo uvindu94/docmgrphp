@@ -1,3 +1,21 @@
+<?php session_start();
+require ('./includes/classes/projects.php');
+require ('./includes/classes/user.php');
+require ('./includes/connection/connection.php');   
+
+$project=new projects();
+$user=new user();
+
+$log_user=$_SESSION['email'];
+
+$sales_officer=$user->retreive_sales_officers($conn);
+$developers=$user->retreive_developers($conn);
+
+$projects=$project->retreive_projects($conn);
+
+
+?>
+
 <!--
 =========================================================
 * Soft UI Dashboard 3 - v1.1.0
@@ -31,6 +49,16 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -45,14 +73,26 @@
 
   <?php
 
- if(isset($_GET['page']))
- {
-  
- }
- else
- {
-  include('./pages/main.php');  
- }
+  if (isset($_GET['page'])) {
+
+    $page = $_GET['page'];
+
+    if ($page == 'projects') {
+      include('./pages/projects.php');
+    } else if ($page == 'users') {
+      include('./pages/users.php');
+    } else if ($page == 'documents') {
+      include('./pages/documents.php');
+    } else if ($page == 'budget_cal') {
+      include('./pages/budget_cal.php');
+    } else if ($page == 'logout') {
+      include('./logout.php');
+    } else {
+      include('./pages/main.php');
+    }
+  } else {
+    include('./pages/main.php');
+  }
 
 
 
