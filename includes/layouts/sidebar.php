@@ -10,7 +10,9 @@
       <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
           <ul class="navbar-nav">
               <li class="nav-item">
-                  <a class="nav-link  active" href="./dashboard.php">
+                  <a class="nav-link  <?php if (!isset($_GET['page'])) {
+                                            echo "active";
+                                        } ?>" href="./dashboard.php">
                       <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                               <title>shop </title>
@@ -31,7 +33,16 @@
               </li>
 
               <li class="nav-item">
-                  <a class="nav-link  " href="./dashboard.php?page=projects">
+                  <a class="nav-link  
+
+
+
+<?php if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+    if ($page == 'projects') {
+        echo "active";
+    }
+} ?>" href="./dashboard.php?page=projects">
                       <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                               <title>office</title>
@@ -52,7 +63,12 @@
               </li>
 
               <li class="nav-item">
-                  <a class="nav-link  " href="./dashboard.php?page=documents">
+                  <a class="nav-link  <?php if (isset($_GET['page'])) {
+                                            $page = $_GET['page'];
+                                            if ($page == 'documents') {
+                                                echo "active";
+                                            }
+                                        } ?>" href="./dashboard.php?page=documents">
                       <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                               <title>credit-card</title>
@@ -74,7 +90,12 @@
 
 
               <li class="nav-item">
-                  <a class="nav-link  " href="./dashboard.php?page=budget_cal">
+                  <a class="nav-link  <?php if (isset($_GET['page'])) {
+                                            $page = $_GET['page'];
+                                            if ($page == 'budget_cal') {
+                                                echo "active";
+                                            }
+                                        } ?>" href="./dashboard.php?page=budget_cal">
                       <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                               <title>document</title>
@@ -93,7 +114,7 @@
                       <span class="nav-link-text ms-1">Budget Cal</span>
                   </a>
               </li>
-              
+
               <!-- <li class="nav-item">
                   <a class="nav-link  " href="../pages/tables.html">
                       <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
